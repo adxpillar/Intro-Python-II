@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+import textwrap
 
 # Declare all the rooms
 
@@ -36,16 +38,69 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
+def try_direction(player, direction):
+    # check the players current location to see if there is a room in the 
+    # specified direction 
+    # if there is a room move player to that room
+    # otherwise print('not moveable')
+    attribute = direction + '_to'
+
+    # USE 'hasattr' to check if a class has an attribute
+    if hasattr(player.current_room, attribute):
+        # valid direction
+        # use getattr to fetch the value associated with the attrb
+        # update player's current room with fetched room 
+        player.current_room = getattr(player.current_room, attribute)
+
+    else:
+        print("Wrong direction!")
+
 
 # Make a new player object that is currently in the 'outside' room.
+ 
+player = Player(room['outside'])
+
 
 # Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+while True:
+    #
+    # * Prints the current room name
+    print('\n')
+    print(player.current_room)
+
+
+    # * Prints the current description (the textwrap module might be useful here).
+    def print_wrapped_lines(value = ''):
+        wrapper = textwrap.TextWrapper(width = 50)
+        word_list = wrapper.wrap(text = value)
+
+        for element in word_list:
+            print(element)
+    * Waits for user input and decides what to do.
+    strip off everything but the first char 
+    command = input("\nCommand: ").strip().lower().split()
+    command_command = command[0]
+    command = command_command[0]
+
+    if command == "q":
+        break 
+    # If the user enters a cardinal direction, attempt to move to the room there.
+    # Print an error message if the movement isn't allowed.
+    # user can enter 'north, south, east, or west"
+    # or any of "n,s,e,w" to move 
+
+
+    if command == "n":
+        # move to north 
+        try_direction(player, command)
+    elif command == "s":
+        # move south 
+        try_direction(player, command)
+    elif command == "e":
+        # move east 
+        try_direction(player, command)
+    elif command == "w":
+        # move west 
+        try_direction(player, command)
+
+

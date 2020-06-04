@@ -70,14 +70,14 @@ while True:
 
 
     # * Prints the current description (the textwrap module might be useful here).
-    def print_wrapped_lines(value = ''):
+    def print_wrapped_lines(value = player.current_room.description):
         wrapper = textwrap.TextWrapper(width = 50)
         word_list = wrapper.wrap(text = value)
 
         for element in word_list:
             print(element)
-    * Waits for user input and decides what to do.
-    strip off everything but the first char 
+    # * Waits for user input and decides what to do.
+    # strip off everything but the first char 
     command = input("\nCommand: ").strip().lower().split()
     command_command = command[0]
     command = command_command[0]

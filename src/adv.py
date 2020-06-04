@@ -39,6 +39,12 @@ room['treasure'].s_to = room['narrow']
 # Main
 #
 def try_direction(player, direction):
+    
+    """
+    args: player and direction
+    returns: none
+    """
+
     # check the players current location to see if there is a room in the 
     # specified direction 
     # if there is a room move player to that room
@@ -71,16 +77,22 @@ while True:
 
     # * Prints the current description (the textwrap module might be useful here).
     def print_wrapped_lines(value = player.current_room.description):
+        """
+        args: room desciption
+        returns: description spaced by 50 widths 
+        """
         wrapper = textwrap.TextWrapper(width = 50)
         word_list = wrapper.wrap(text = value)
 
         for element in word_list:
-            print(element)
+            return element
     # * Waits for user input and decides what to do.
     # strip off everything but the first char 
     command = input("\nCommand: ").strip().lower().split()
-    command_command = command[0]
-    command = command_command[0]
+    command = command[0]
+    # command = command_command[0]
+
+    commands = ['n','s','e','w']
 
     if command == "q":
         break 
@@ -88,19 +100,8 @@ while True:
     # Print an error message if the movement isn't allowed.
     # user can enter 'north, south, east, or west"
     # or any of "n,s,e,w" to move 
-
-
-    if command == "n":
-        # move to north 
-        try_direction(player, command)
-    elif command == "s":
-        # move south 
-        try_direction(player, command)
-    elif command == "e":
-        # move east 
-        try_direction(player, command)
-    elif command == "w":
-        # move west 
-        try_direction(player, command)
-
+    else:
+        if command in commands:
+            # move to north 
+            try_direction(player, command)
 
